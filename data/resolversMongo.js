@@ -64,6 +64,26 @@ export const resolvers = {
 			const newSupplier = new Suppliers(args);
 	           	return newSupplier.save();
 		},
+		addCustomer: async (parent, args) => {
+    		const newCustomer = new Customers(args);
+				return newCustomer.save();	
+		},
+		addEmployee: async (parent, args) => {
+			const newEmployee = new Employees(args);
+				return newEmployee.save();
+		},
+		addOrder: async (parent, args) => {
+			const newOrder = new Orders(args);
+	           	return newOrder.save();
+		},
+		addOrderDetail: async (parent, args) => {
+			const newOrderDetail = new OrderDetails(args);
+	           	return newOrderDetail.save();
+		},
+		addShipper: async (parent, args) => {
+			const newShipper = new Shippers(args);
+	           	return newShipper.save();
+		},
 		updateCategory: async (parent, args) => {
 			const { CategoryID, ...rest } = args;
 				return Categories.findOneAndUpdate({CategoryID: CategoryID}, rest, { new: true });
