@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const Categories = mongoose.model('Categories');
 const Products = mongoose.model('Products');
 const Suppliers = mongoose.model('Suppliers');
+const Customers = mongoose.model('Customers');
+const Employees = mongoose.model('Employees');
+const Orders = mongoose.model('Orders');
+const Shippers = mongoose.model('Shippers');
 
 export const resolvers = {
 	Query: {
@@ -14,6 +18,18 @@ export const resolvers = {
 
 		suppliers: async () => await Suppliers.find(),
 		supplier: async (parent, { SupplierID }) => await Suppliers.findOne({SupplierID: SupplierID}),
+
+		customers: async () => await Customers.find(),
+		customer: async (parent, { CustomerID }) => await Customers.findOne({CustomerID: CustomerID}),
+
+		employees: async () => await Employees.find(),
+		employee:  async (parent, { EmployeeID }) => await Employees.findOne({EmployeeID: EmployeeID}),
+
+		orders: async () => await Orders.find(),
+		order: async (parent, { OrderID }) => await Orders.findOne({OrderID: OrderID}),
+
+		shippers: async () => await Shippers.find(),
+		shipper: async (parent, { ShipperID }) => await Shippers.findOne({ShipperID: ShipperID}),
 	},
 	Categories: {
 		Products: async (parent) => await Products.find({ CategoryID: parent.CategoryID })
@@ -24,6 +40,16 @@ export const resolvers = {
 	Products: {
 		Supplier: async (parent) => await Suppliers.findOne({SupplierID: parent.SupplierID}),
 		Category: async (parent) => await Categories.findOne({CategoryID: parent.CategoryID})
+	},
+	Customers: {
+		Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
+	},
+	Employees: {
+		Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
+	},
+	Orders: {
+		OrderDetails: async (parent) => await OrderDetails.find({ OrderID: parent.OrderID }),
+		OrderDetails: async (parent) => await OrderDetails.find({ ProductID: parent.ProductID }),
 	},
 	Mutation: {
 		addCategory: async (parent, args) => {
