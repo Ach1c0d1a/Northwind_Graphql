@@ -1,0 +1,263 @@
+[
+	{
+		"SupplierID" : 1,
+		"CompanyName" : "Exotic Liquids",
+		"ContactName" : "Charlotte Cooper",
+		"ContactTitle" : "Purchasing Manager",
+		"Country" : "UK",
+		"City" : "London",
+		"Address" : "49 Gilbert St."
+	},
+	{
+		"SupplierID" : 2,
+		"CompanyName" : "New Orleans Cajun Delights",
+		"ContactName" : "Shelley Burke",
+		"ContactTitle" : "Order Administrator",
+		"Country" : "USA",
+		"City" : "New Orleans",
+		"Address" : "P.O. Box 78934"
+	},
+	{
+		"SupplierID" : 3,
+		"CompanyName" : "Grandma Kelly's Homestead",
+		"ContactName" : "Regina Murphy",
+		"ContactTitle" : "Sales Representative",
+		"Country" : "USA",
+		"City" : "Ann Arbor",
+		"Address" : "707 Oxford Rd."
+	},
+	{
+		"SupplierID" : 4,
+		"CompanyName" : "Tokyo Traders",
+		"ContactName" : "Yoshi Nagase",
+		"ContactTitle" : "Marketing Manager",
+		"Country" : "Japan",
+		"City" : "Tokyo",
+		"Address" : "9-8 Sekimai Musashino-shi"
+	},
+	{
+		"SupplierID" : 5,
+		"CompanyName" : "Cooperativa de Quesos 'Las Cabras'",
+		"ContactName" : "Antonio del Valle Saavedra ",
+		"ContactTitle" : "Export Administrator",
+		"Country" : "Spain",
+		"City" : "Oviedo",
+		"Address" : "Calle del Rosal 4"
+	},
+	{
+		"SupplierID" : 6,
+		"CompanyName" : "Mayumi's",
+		"ContactName" : "Mayumi Ohno",
+		"ContactTitle" : "Marketing Representative",
+		"Country" : "Japan",
+		"City" : "Osaka",
+		"Address" : "92 Setsuko Chuo-ku"
+	},
+	{
+		"SupplierID" : 7,
+		"CompanyName" : "Pavlova, Ltd.",
+		"ContactName" : "Ian Devling",
+		"ContactTitle" : "Marketing Manager",
+		"Country" : "Australia",
+		"City" : "Melbourne",
+		"Address" : "74 Rose St. Moonie Ponds"
+	},
+	{
+		"SupplierID" : 8,
+		"CompanyName" : "Specialty Biscuits, Ltd.",
+		"ContactName" : "Peter Wilson",
+		"ContactTitle" : "Sales Representative",
+		"Country" : "UK",
+		"City" : "Manchester",
+		"Address" : "29 King's Way"
+	},
+	{
+		"SupplierID" : 9,
+		"CompanyName" : "PB Knäckebröd AB",
+		"ContactName" : "Lars Peterson",
+		"ContactTitle" : "Sales Agent",
+		"Country" : "Sweden ",
+		"City" : "Göteborg",
+		"Address" : "Kaloadagatan 13"
+	},
+	{
+		"SupplierID" : 10,
+		"CompanyName" : "Refrescos Americanas LTDA",
+		"ContactName" : "Carlos Diaz",
+		"ContactTitle" : "Marketing Manager",
+		"Country" : "Brazil",
+		"City" : "São Paulo",
+		"Address" : "Av. das Americanas 12.890"
+	},
+	{
+		"SupplierID" : 11,
+		"CompanyName" : "Heli Süßwaren GmbH & Co. KG",
+		"ContactName" : "Petra Winkler",
+		"ContactTitle" : "Sales Manager",
+		"Country" : "Germany",
+		"City" : "Berlin",
+		"Address" : "Tiergartenstraße 5"
+	},
+	{
+		"SupplierID" : 12,
+		"CompanyName" : "Plutzer Lebensmittelgroßmärkte AG",
+		"ContactName" : "Martin Bein",
+		"ContactTitle" : "International Marketing Mgr.",
+		"Country" : "Germany",
+		"City" : "Frankfurt",
+		"Address" : "Bogenallee 51"
+	},
+	{
+		"SupplierID" : 13,
+		"CompanyName" : "Nord-Ost-Fisch Handelsgesellschaft mbH",
+		"ContactName" : "Sven Petersen",
+		"ContactTitle" : "Coordinator Foreign Markets",
+		"Country" : "Germany",
+		"City" : "Cuxhaven",
+		"Address" : "Frahmredder 112a"
+	},
+	{
+		"SupplierID" : 14,
+		"CompanyName" : "Formaggi Fortini s.r.l.",
+		"ContactName" : "Elio Rossi",
+		"ContactTitle" : "Sales Representative",
+		"Country" : "Italy",
+		"City" : "Ravenna",
+		"Address" : "Viale Dante, 75"
+	},
+	{
+		"SupplierID" : 15,
+		"CompanyName" : "Norske Meierier",
+		"ContactName" : "Beate Vileid",
+		"ContactTitle" : "Marketing Manager",
+		"Country" : "Norway",
+		"City" : "Sandvika",
+		"Address" : "Hatlevegen 5"
+	},
+	{
+		"SupplierID" : 16,
+		"CompanyName" : "Bigfoot Breweries",
+		"ContactName" : "Cheryl Saylor",
+		"ContactTitle" : "Regional Account Rep.",
+		"Country" : "USA",
+		"City" : "Bend",
+		"Address" : "3400 - 8th Avenue\r\nSuite 210"
+	},
+	{
+		"SupplierID" : 17,
+		"CompanyName" : "Svensk Sjöföda AB",
+		"ContactName" : "Michael Björn",
+		"ContactTitle" : "Sales Representative",
+		"Country" : "Sweden",
+		"City" : "Stockholm",
+		"Address" : "Brovallavägen 231"
+	},
+	{
+		"SupplierID" : 18,
+		"CompanyName" : "Aux joyeux ecclésiastiques",
+		"ContactName" : "Guylène Nodier",
+		"ContactTitle" : "Sales Manager",
+		"Country" : "France",
+		"City" : "Paris",
+		"Address" : "203, Rue des Francs-Bourgeois"
+	},
+	{
+		"SupplierID" : 19,
+		"CompanyName" : "New England Seafood Cannery",
+		"ContactName" : "Robb Merchant",
+		"ContactTitle" : "Wholesale Account Agent",
+		"Country" : "USA",
+		"City" : "Boston",
+		"Address" : "Order Processing Dept. 2100 Paul Revere Blvd."
+	},
+	{
+		"SupplierID" : 20,
+		"CompanyName" : "Leka Trading",
+		"ContactName" : "Chandra Leka",
+		"ContactTitle" : "Owner",
+		"Country" : "Singapore",
+		"City" : "Singapore",
+		"Address" : "471 Serangoon Loop, Suite #402"
+	},
+	{
+		"SupplierID" : 21,
+		"CompanyName" : "Lyngbysild",
+		"ContactName" : "Niels Petersen",
+		"ContactTitle" : "Sales Manager",
+		"Country" : "Denmark",
+		"City" : "Lyngby",
+		"Address" : "Lyngbysild Fiskebakken 10"
+	},
+	{
+		"SupplierID" : 22,
+		"CompanyName" : "Zaanse Snoepfabriek",
+		"ContactName" : "Dirk Luchte",
+		"ContactTitle" : "Accounting Manager",
+		"Country" : "Netherlands",
+		"City" : "Zaandam",
+		"Address" : "Verkoop Rijnweg 22"
+	},
+	{
+		"SupplierID" : 23,
+		"CompanyName" : "Karkki Oy",
+		"ContactName" : "Anne Heikkonen",
+		"ContactTitle" : "Product Manager",
+		"Country" : "Finland",
+		"City" : "Lappeenranta",
+		"Address" : "Valtakatu 12"
+	},
+	{
+		"SupplierID" : 24,
+		"CompanyName" : "G'day, Mate",
+		"ContactName" : "Wendy Mackenzie",
+		"ContactTitle" : "Sales Representative",
+		"Country" : "Australia",
+		"City" : "Sydney",
+		"Address" : "170 Prince Edward Parade Hunter's Hill"
+	},
+	{
+		"SupplierID" : 25,
+		"CompanyName" : "Ma Maison",
+		"ContactName" : "Jean-Guy Lauzon",
+		"ContactTitle" : "Marketing Manager",
+		"Country" : "Canada",
+		"City" : "Montréal",
+		"Address" : "2960 Rue St. Laurent"
+	},
+	{
+		"SupplierID" : 26,
+		"CompanyName" : "Pasta Buttini s.r.l.",
+		"ContactName" : "Giovanni Giudici",
+		"ContactTitle" : "Order Administrator",
+		"Country" : "Italy",
+		"City" : "Salerno",
+		"Address" : "Via dei Gelsomini, 153"
+	},
+	{
+		"SupplierID" : 27,
+		"CompanyName" : "Escargots Nouveaux",
+		"ContactName" : "Marie Delamare",
+		"ContactTitle" : "Sales Manager",
+		"Country" : "France",
+		"City" : "Montceau",
+		"Address" : "22, rue H. Voiron"
+	},
+	{
+		"SupplierID" : 28,
+		"CompanyName" : "Gai pâturage",
+		"ContactName" : "Eliane Noz",
+		"ContactTitle" : "Sales Representative",
+		"Country" : "France",
+		"City" : "Annecy",
+		"Address" : "Bat. B3, rue des Alpes"
+	},
+	{
+		"SupplierID" : 29,
+		"CompanyName" : "Forêts d'érables",
+		"ContactName" : "Chantal Goulet",
+		"ContactTitle" : "Accounting Manager",
+		"Country" : "Canada",
+		"City" : "Ste-Hyacinthe",
+		"Address" : "148 rue Chasseur"
+	}
+]
