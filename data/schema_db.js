@@ -29,7 +29,55 @@ export const typeDefs = `#graphql
 		UnitsInStock: Int!,        
 		ReorderLevel: Int!,
 	}
+
+	type Employees {
+		EmployeeID: Int!,
+    	LastName: String!,
+    	FirstName: String!,
+    	Title: String!,
+    	TitleOfCourtesy: String!,
+    	BirthDate: String!,
+    	HireDate: String!,
+    	Country: String!,
+    	City: String!,
+    	Address: String!,
+	}
+
+	type OrderDetails {
+		OrderID: ID!,
+		Order: Orders!,
+		ProductID: ID!,
+		Product: Orders!,
+		ProductID: Int!,
+		UnitPrice: Float!,
+    	Quantity: Int!,
+		Discount: Float!,
+	}
 	   
+	type Orders {
+		OrderID: Int!,
+		CustomerID: ID!,
+		Customer: Customer!,
+		EmployeeID: ID!,
+		Employee: Employees!,
+		OrderDate: String!,
+		RequiredDate: String!,
+		ShippedDate: String!,
+		ShipVia: Int!,
+		Freight: Float!,
+		ShipName: String!,
+		ShipCountry: String!,
+		ShipCity: String!,
+		ShipAddress: String!,
+		ShipPostalCode: String!
+	}
+
+	type Shippers {
+		ShipperID: Int!,
+		CompanyName: String!,
+		Description: String!,
+	}
+
 	type Query {
 		categories: [Categories]!,
 		category(CategoryID: Int!): Categories,        
