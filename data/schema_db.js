@@ -30,6 +30,17 @@ export const typeDefs = `#graphql
 		ReorderLevel: Int!,
 	}
 
+	type Customers {
+		CustomerID: String!,
+		CompanyName: String!,
+		ContactName: String!,
+		ContactTitle: String!,
+		Country: String!,
+		City: String!,
+		Address: String!,
+		Orders: [Orders]!
+	}
+	
 	type Employees {
 		EmployeeID: Int!,
     	LastName: String!,
@@ -41,13 +52,14 @@ export const typeDefs = `#graphql
     	Country: String!,
     	City: String!,
     	Address: String!,
+		Orders: [Orders]!
 	}
 
 	type OrderDetails {
 		OrderID: ID!,
 		Order: Orders!,
 		ProductID: ID!,
-		Product: Orders!,
+		Product: Products!,
 		ProductID: Int!,
 		UnitPrice: Float!,
     	Quantity: Int!,
