@@ -47,10 +47,6 @@ export const resolvers = {
 	Employees: {
 		Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
 	},
-	Orders: {
-		OrderDetails: async (parent) => await OrderDetails.find({ OrderID: parent.OrderID }),
-		OrderDetails: async (parent) => await OrderDetails.find({ ProductID: parent.ProductID }),
-	},
 	Mutation: {
 		addCategory: async (parent, args) => {
     		const newCategory = new Categories(args);
@@ -76,10 +72,6 @@ export const resolvers = {
 			const newOrder = new Orders(args);
 	           	return newOrder.save();
 		},
-		addOrderDetail: async (parent, args) => {
-			const newOrderDetail = new OrderDetails(args);
-	           	return newOrderDetail.save();
-		},
 		addShipper: async (parent, args) => {
 			const newShipper = new Shippers(args);
 	           	return newShipper.save();
@@ -96,6 +88,22 @@ export const resolvers = {
 			const { SupplierID, ...rest } = args;
 				return Suppliers.findOneAndUpdate({SupplierID: SupplierID}, rest, { new: true });
 		},
+		updateCustomer: async (parent, args) => {
+			const { CustomerID, ...rest } = args;
+				return Customers.findOneAndUpdate({CustomerID: CustomerID}, rest, { new: true });
+		},
+		updateEmployee: async (parent, args) => {
+			const { EmployeeID, ...rest } = args;
+				return Employees.findOneAndUpdate({EmployeeID: EmployeeID}, rest, { new: true });
+		},
+		updateOrder: async (parent, args) => {
+			const { OrderID, ...rest } = args;
+				return Suppliers.findOneAndUpdate({OrderID: OrderID}, rest, { new: true });
+		},
+		updateShipper: async (parent, args) => {
+			const { ShipperID, ...rest } = args;
+				return Shippers.findOneAndUpdate({ShipperID: ShipperID}, rest, { new: true });
+		},
 		deleteCategory: async (parent, { CategoryID }) => {
 			return Categories.findOneAndDelete({CategoryID: CategoryID});
 		},
@@ -104,6 +112,18 @@ export const resolvers = {
 		},
 		deleteSupplier: async (parent, { SupplierID }) => {
 			return Suppliers.findOneAndDelete({SupplierID: SupplierID});
+		},
+		deleteCustomer: async (parent, { CustomerID }) => {
+			return Customers.findOneAndDelete({CustomerID: CustomerID});
+		},
+		deleteEmployee: async (parent, { EmployeeID }) => {
+			return Employees.findOneAndDelete({EmployeeID: EmployeeID});
+		},
+		deleteOrder: async (parent, { OrderID }) => {
+			return Orders.findOneAndDelete({OrderID: OrderID});
+		},
+		deleteShipper: async (parent, { ShipperID }) => {
+			return Orders.findOneAndDelete({ShipperID: ShipperID});
 		}
 	}
 }

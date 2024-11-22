@@ -11,6 +11,10 @@ mongoose.connect('mongodb://localhost:27017/', {dbName: 'Northwind'})
 import './models/mdl_Categories.js';
 import './models/mdl_Products.js';
 import './models/mdl_Suppliers.js';
+import './models/mdl_Customers.js';
+import './models/mdl_Employees.js';
+import './models/mdl_Orders.js';
+import './models/mdl_Shippers.js';
 
 // Load data resources
 import { typeDefs } from './data/schema_db.js';

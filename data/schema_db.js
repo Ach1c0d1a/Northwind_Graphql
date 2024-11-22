@@ -27,8 +27,7 @@ export const typeDefs = `#graphql
 		QuantityPerUnit: String!,
 		UnitPrice: Float!,
 		UnitsInStock: Int!,        
-		ReorderLevel: Int!,
-		OrderDetails: [OrderDetails]!
+		ReorderLevel: Int!
 	}
 
 	type Customers {
@@ -55,21 +54,11 @@ export const typeDefs = `#graphql
     	Address: String!,
 		Orders: [Orders]!
 	}
-
-	type OrderDetails {
-		OrderID: ID!,
-		Order: Orders!,
-		ProductID: ID!,
-		Product: Products!,
-		UnitPrice: Float!,
-    	Quantity: Int!,
-		Discount: Float!,
-	}
 	   
 	type Orders {
 		OrderID: Int!,
 		CustomerID: ID!,
-		Customer: Customer!,
+		Customer: Customers!,
 		EmployeeID: ID!,
 		Employee: Employees!,
 		OrderDate: String!,
@@ -81,8 +70,7 @@ export const typeDefs = `#graphql
 		ShipCountry: String!,
 		ShipCity: String!,
 		ShipAddress: String!,
-		ShipPostalCode: String!,
-		OrderDetails: [OrderDetails]!
+		ShipPostalCode: String!
 	}
 
 	type Shippers {
@@ -120,7 +108,6 @@ export const typeDefs = `#graphql
 		addSupplier(SupplierID: Int!, CompanyName: String!, ContactName: String!, ContactTitle: String!, Country: String!, City: String!, Address: String!): Suppliers,
 		addCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
 		addEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
-		addOrderDetail(OrderID: ID!, ProductID: ID!, UnitPrice: Float!, Quantity: Int!, Discount: Float!): OrderDetails,
 		addOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
 		addShipper(ShipperID: Int!, CompanyName: String!, Description: String!): Shippers
 
@@ -129,7 +116,6 @@ export const typeDefs = `#graphql
 		updateSupplier(SupplierID: Int!, CompanyName: String, ContactName: String, ContactTitle: String, Country: String, City: String, Address: String): Suppliers,
 		updateCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
 		updateEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
-		updateOrderDetail(OrderID: ID!, ProductID: ID!, UnitPrice: Float!, Quantity: Int!, Discount: Float!): OrderDetails,
 		updateOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
 		updateShipper(ShipperID: Int!, CompanyName: String!, Description: String!): Shippers		
 			
@@ -138,7 +124,6 @@ export const typeDefs = `#graphql
 		deleteSupplier(SupplierID: Int!): Suppliers,    
 		deleteCustomer(CustomerID: String!): Customers,
 		deleteEmployee(EmployeeID: Int!): Employees,
-		deleteOrderDetail(OrderID: ID!, ProductID: ID!): OrderDetails,
 		deleteOrder(OrderID: Int!): Orders,
 		deleteShipper(ShipperID: Int!): Shippers	
 	}
