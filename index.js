@@ -2,10 +2,11 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
-// Connection to MongoDB
+//  Connection to MongoDB
 import mongoose from "mongoose";
 mongoose.connect('mongodb://localhost:27017/', {dbName: 'Northwind'})
 	.then(r  => console.log('Connected to MongoDB'));
+
 
 // Load models
 import './models/mdl_Categories.js';
@@ -20,10 +21,10 @@ import './models/mdl_Shippers.js';
 import { typeDefs } from './data/schema_db.js';
 
 // Mongo DB
-//import { resolvers } from './data/resolversMongo.js';
+ import { resolvers } from './data/resolversMongo.js';
 
 // Apolo Server
-import { resolvers } from './data/resolvers.js';
+//import { resolvers } from './data/resolvers.js';
 
 
 // Publish data resources

@@ -98,7 +98,7 @@ export const resolvers = {
 		},
 		updateOrder: async (parent, args) => {
 			const { OrderID, ...rest } = args;
-				return Suppliers.findOneAndUpdate({OrderID: OrderID}, rest, { new: true });
+				return Orders.findOneAndUpdate({OrderID: OrderID}, rest, { new: true });
 		},
 		updateShipper: async (parent, args) => {
 			const { ShipperID, ...rest } = args;
@@ -123,7 +123,7 @@ export const resolvers = {
 			return Orders.findOneAndDelete({OrderID: OrderID});
 		},
 		deleteShipper: async (parent, { ShipperID }) => {
-			return Orders.findOneAndDelete({ShipperID: ShipperID});
+			return Shippers.findOneAndDelete({ShipperID: ShipperID});
 		}
 	}
 }

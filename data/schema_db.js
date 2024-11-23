@@ -55,8 +55,6 @@ export const typeDefs = `#graphql
 		Orders: [Orders]!
 	}
 
-	
-	   
 	type Orders {
 		OrderID: Int!,
 		CustomerID: ID!,
@@ -78,7 +76,7 @@ export const typeDefs = `#graphql
 	type Shippers {
 		ShipperID: Int!,
 		CompanyName: String!,
-		Description: String!,
+		Phone: String!,
 	}
 
 	type Query {
@@ -89,7 +87,7 @@ export const typeDefs = `#graphql
 		product(ProductID: Int!): Products,        
 		
 		suppliers: [Suppliers]!,
-		supplier(SupplierID: Int!): Suppliers
+		supplier(SupplierID: Int!): Suppliers,
 
 		customers: [Customers]!,
 		customer(CustomerID: String!): Customers,        
@@ -98,7 +96,7 @@ export const typeDefs = `#graphql
 		employee(EmployeeID: Int!): Employees,        
 		
 		orders: [Orders]!,
-		order(OrderID: Int!): Orders
+		order(OrderID: Int!): Orders,
 
 		shippers: [Shippers]!,
 		shipper(ShipperID: Int!): Shippers
@@ -111,7 +109,7 @@ export const typeDefs = `#graphql
 		addCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
 		addEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
 		addOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
-		addShipper(ShipperID: Int!, CompanyName: String!, Description: String!): Shippers
+		addShipper(ShipperID: Int!, CompanyName: String!, Phone: String!): Shippers
 
 		updateCategory(CategoryID: Int!, CategoryName: String, Description: String): Categories,
 		updateProduct(ProductID: Int!, ProductName: String, SupplierID: ID, CategoryID: ID, QuantityPerUnit: String, UnitPrice: Float, UnitsInStock: Int, ReorderLevel: Int): Products,
@@ -119,7 +117,7 @@ export const typeDefs = `#graphql
 		updateCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
 		updateEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
 		updateOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
-		updateShipper(ShipperID: Int!, CompanyName: String!, Description: String!): Shippers		
+		updateShipper(ShipperID: Int!, CompanyName: String!, Phone: String!): Shippers		
 			
 		deleteCategory(CategoryID: Int!): Categories,
 		deleteProduct(ProductID: Int!): Products,
