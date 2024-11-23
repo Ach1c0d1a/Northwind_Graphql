@@ -28616,4 +28616,4 @@ shippers =
 	}
 ]
 
-export default {categories, customers, employees, products, suppliers, shippers, orderDetails, orders};
+export default {categories, customers, employees, products, suppliers, shippers, orders};

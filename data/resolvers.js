@@ -8,6 +8,18 @@ export const resolvers = {
 
 		suppliers: () => db.suppliers,
 		supplier: (parent, { SupplierID }) => db.suppliers.find(supplier => supplier.SupplierID === SupplierID),
+
+        customers: () => db.customers,
+		customer: (parent, { CustomerID }) => db.customers.find(customer => customer.CustomerID === CustomerID),
+
+		employees: () => db.employees,
+		employee: (parent, { EmployeeID }) => db.employees.find(employee => employee.EmployeeID === EmployeeID),
+
+		orders: () => db.orders,
+		order: (parent, { OrderID }) => db.orders.find(order => order.OrderID === OrderID),
+
+		shippers: () => db.shippers, 
+		shipper: (parent, { ShipperID }) => db.shippers.find(shipper => shipper.ShipperID === ShipperID),
 	},
     Categories: {
         Products: (parent) => db.products.filter(product => product.CategoryID === parent.CategoryID)
@@ -18,6 +30,12 @@ export const resolvers = {
     Products: {
         Supplier: (parent) => db.suppliers.find(supplier => supplier.SupplierID === parent.SupplierID),
         Category: (parent) => db.categories.find(category => category.CategoryID === parent.CategoryID)
+    },
+    Customers: {
+        Orders: (parent) => db.orders.filter(order => order.OrderID === parent.OrderID)
+    },
+    Employees: {
+        Orders: (parent) => db.orders.filter(order => order.OrderID === parent.OrderID)
     },
     Mutation: {
         addCategory: (parent, args) => {
@@ -34,6 +52,26 @@ export const resolvers = {
             const newSupplier = { ...args };
             db.suppliers.push(newSupplier);
             return newSupplier;
+        },
+        addCustomer: (parent, args) => {
+            const newCustomer = { ...args };
+            db.customers.push(newCustomer);
+            return newCustomer;
+        },
+        addEmployee: (parent, args) => {
+            const newEmployee = { ...args };
+            db.employees.push(newEmployee);
+            return newEmployee;
+        },
+        addOrder: (parent, args) => {
+            const newOrder = { ...args };
+            db.orders.push(newOrder);
+            return newOrder;
+        },
+        addShipper: (parent, args) => {
+            const newShipper = { ...args };
+            db.shippers.push(newShipper);
+            return newShipper;
         },
         updateCategory: (parent, args) => {
             const { CategoryID, ...rest } = args;
@@ -53,6 +91,24 @@ export const resolvers = {
             Object.assign(supplier, rest);
             return supplier;
         },
+        updateCustomer: (parent, args) => {
+            const { CustomerID, ...rest } = args;
+            const customer = db.customers.find(customer => customer.CustomerID === CustomerID);
+            Object.assign(customer, rest);
+            return customer;
+        },
+        updateEmployee: (parent, args) => {
+            const { EmployeeID, ...rest } = args;
+            const employee = db.employees.find(employee => employee.EmployeeID === EmployeeID);
+            Object.assign(employee, rest);
+            return employee;
+        },
+        updateOrder: (parent, args) => {
+            const { OrderID, ...rest } = args;
+            const order = db.orders.find(order => order.OrderID === OrderID);
+            Object.assign(order, rest);
+            return order;
+        },
         deleteCategory: (parent, { CategoryID }) => {
             const category = db.categories.find(category => category.CategoryID === CategoryID);
             db.categories = db.categories.filter(category => category.CategoryID !== CategoryID);
@@ -67,6 +123,21 @@ export const resolvers = {
             const supplier = db.suppliers.find(supplier => supplier.SupplierID === SupplierID);
             db.suppliers = db.suppliers.filter(supplier => supplier.SupplierID !== SupplierID);
             return supplier;
+        },
+        deleteCustomer: (parent, { CategoryID }) => {
+            const customer = db.customers.find(customer => customer.CustomerID === CustomerID);
+            db.categories = db.customers.filter(customer => customer.CustomerID !== CustomerID);
+            return customer;
+        },
+        deleteEmployee: (parent, { ProductID }) => {
+            const employee = db.employees.find(employee => employee.EmployeeID === EmployeeID);
+            db.employees = db.employees.filter(employee => employee.EmployeeID !== EmployeeID);
+            return employee;
+        },
+        deleteSupplier: (parent, { ShipperID }) => {
+            const shipper = db.shippers.find(shipper => shipper.ShipperID === ShipperID);
+            db.shippers = db.shippers.filter(shipper => shipper.ShipperID !== ShipperID);
+            return shipper;
         }
     }
 }

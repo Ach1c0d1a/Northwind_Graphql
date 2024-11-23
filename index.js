@@ -18,7 +18,13 @@ import './models/mdl_Shippers.js';
 
 // Load data resources
 import { typeDefs } from './data/schema_db.js';
-import { resolvers } from './data/resolversMongo.js';
+
+// Mongo DB
+//import { resolvers } from './data/resolversMongo.js';
+
+// Apolo Server
+import { resolvers } from './data/resolvers.js';
+
 
 // Publish data resources
 const server = new ApolloServer({
