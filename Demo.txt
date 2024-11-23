@@ -574,5 +574,66 @@ Step 06 - Update the new resolvers using MongoDB
 	- Save changes
 
 
+Step 07 - Update <root_project>/index.js
+
+	- Remember:
+
+		- Change the data connection with mongoDB
+		- Run the MongoDB instance
+		
+
+	- Open <root_project>/index.js and delete all code and writes:
+	
+		// Call ApolloServer and startStandaloneServer
+		import { ApolloServer } from '@apollo/server';
+		import { startStandaloneServer } from '@apollo/server/standalone';
+
+		// Connection to MongoDB
+		import mongoose from "mongoose";
+		mongoose.connect('mongodb://127.0.01:27017/', {dbName: 'Northwind'})
+			.then(r  => console.log('Connected to MongoDB'));
+
+		// Load models
+		 :
+		 :
+		 :
+		import './models/mdl_Customers.js';
+		import './models/mdl_Employees.js';
+		import './models/mdl_Orders.js';
+		import './models/mdl_Shippers.js';
+
+		// Load data resources
+		import { typeDefs } from './data/schema.js';
+		import { resolvers } from './data/resolversMongo.js';
+
+		// Publish data resources
+		const server = new ApolloServer({
+			typeDefs,
+			resolvers
+		},);
+
+		// Run Apollo Server
+		const {url} = await startStandaloneServer(server,{
+			listen: { port: 4005 }
+		});
+
+		console.log(`Server ready at ${url}`);
+	
+	
+	- Save changes
+
+- Run application, in the terminal window, run:
+
+		npm start
+		
+    - You can see a message as below:
+		
+			[nodemon] 3.1.4
+			[nodemon] to restart at any time, enter `rs`
+			[nodemon] watching path(s): *.*
+			[nodemon] watching extensions: js,mjs,cjs,json
+			[nodemon] starting `node index.js`
+			Connected to MongoDB
+			Server ready at http://localhost:4005/
 
 
