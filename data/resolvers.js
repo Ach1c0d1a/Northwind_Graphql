@@ -109,6 +109,12 @@ export const resolvers = {
             Object.assign(order, rest);
             return order;
         },
+        updateShipper: (parent, args) => {
+            const { ShipperID, ...rest } = args;
+            const shipper = db.shippers.find(shipper => shipper.ShipperID === ShipperID);
+            Object.assign(shipper, rest);
+            return shipper;
+        },
         deleteCategory: (parent, { CategoryID }) => {
             const category = db.categories.find(category => category.CategoryID === CategoryID);
             db.categories = db.categories.filter(category => category.CategoryID !== CategoryID);
@@ -134,7 +140,12 @@ export const resolvers = {
             db.employees = db.employees.filter(employee => employee.EmployeeID !== EmployeeID);
             return employee;
         },
-        deleteSupplier: (parent, { ShipperID }) => {
+        deleteOrder: (parent, { OrderID }) => {
+            const order = db.orders.find(order => order.OrderID === OrderID);
+            db.orders = db.orders.filter(order => order.OrderID !== OrderID);
+            return order;
+        },
+        deleteShipper: (parent, { ShipperID }) => {
             const shipper = db.shippers.find(shipper => shipper.ShipperID === ShipperID);
             db.shippers = db.shippers.filter(shipper => shipper.ShipperID !== ShipperID);
             return shipper;

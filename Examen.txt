@@ -1,0 +1,578 @@
+================================================================================================
+Study Center....: Universidad Técnica Nacional
+Campus..........: Pacífico (JRMP)
+College career..: Ingeniería en Tecnologías de Información
+Period..........: 3C-2024
+Course..........: ITI-912 - Administración de Bases de Datos Avanzada
+Document........: GraphQL implmentation Test 
+Goals...........: Create a server of GraphQL using Apollo Server in JavaScript technology.
+				  Use a local dataset in JSON format
+				  Create types.
+				  Create resolvers:
+					 Create queries
+					 Create relationships
+					 Create mutations
+				  Using MongoDB:
+                    Create schemas
+                    Alter resolvers                   
+Professor.......: Jorge Ruiz (york)
+Student.........: 
+================================================================================================
+
+Required tools:
+
+	- Database engine.......: MongoDB CS 7.0		https://www.mongodb.com/try/download/community
+	
+	- Managament database...: MongoDB Compass		https://www.mongodb.com/products/tools/compass
+	
+	- Language support......: Node.JS LTS 20.15.x	        https://nodejs.org/en
+	
+	- Developer tool........: Visual Code			https://code.visualstudio.com/download
+	
+	- and a lot of enthusiasm to learn
+	
+
+Step 01	- Update db
+
+	- Open <root_project>/data/_db.js and writes the next data from Examen_db.txt file, after collections categories, products and suppliers:
+
+
+let customers = [
+.
+.
+.
+let employees = [
+.
+.
+.
+
+let shippers = [
+.
+.
+.
+
+let orders = [
+
+.
+.
+.
+
+let orderDetails = [
+.
+.
+.
+
+   -- And update with export default with new collections
+
+export default {categories, customers, employees, products, suppliers, shippers, orders, orderDetails};
+
+
+- Save changes
+
+
+Step 02	- Update schemas
+
+	- Open <root_project>/data/schema.js
+	
+export const typeDefs = `#graphql
+	type Categories {
+		CategoryID: Int!,
+		CategoryName: String!,
+		Description: String!,
+		Products: [Products]!
+	}
+
+	type Suppliers{
+		SupplierID: Int!,
+		CompanyName: String!,
+		ContactName: String!,
+		ContactTitle: String!,
+		Country: String!,
+		City: String!,
+		Address: String!,
+		Products: [Products]!
+	}
+
+	type Products {
+		ProductID: Int!,
+		ProductName: String!,
+		SupplierID: ID!,
+		Supplier: Suppliers!,
+		CategoryID: ID!,
+		Category: Categories!,
+		QuantityPerUnit: String!,
+		UnitPrice: Float!,
+		UnitsInStock: Int!,        
+		ReorderLevel: Int!
+	}
+
+	type Customers {
+		CustomerID: String!,
+		CompanyName: String!,
+		ContactName: String!,
+		ContactTitle: String!,
+		Country: String!,
+		City: String!,
+		Address: String!,
+		Orders: [Orders]!
+	}
+	
+	type Employees {
+		EmployeeID: Int!,
+    		LastName: String!,
+    		FirstName: String!,
+    		Title: String!,
+    		TitleOfCourtesy: String!,
+    		BirthDate: String!,
+    		HireDate: String!,
+    		Country: String!,
+    		City: String!,
+    		Address: String!,
+		Orders: [Orders]!
+	}
+	   
+	type Orders {
+		OrderID: Int!,
+		CustomerID: ID!,
+		Customer: Customers!,
+		EmployeeID: ID!,
+		Employee: Employees!,
+		OrderDate: String!,
+		RequiredDate: String!,
+		ShippedDate: String!,
+		ShipVia: Int!,
+		Freight: Float!,
+		ShipName: String!,
+		ShipCountry: String!,
+		ShipCity: String!,
+		ShipAddress: String!,
+		ShipPostalCode: String!
+	}
+
+	type Shippers {
+		ShipperID: Int!,
+		CompanyName: String!,
+		Description: String!,
+	}
+
+	type Query {
+		categories: [Categories]!,
+		category(CategoryID: Int!): Categories,        
+		
+		products: [Products]!,
+		product(ProductID: Int!): Products,        
+		
+		suppliers: [Suppliers]!,
+		supplier(SupplierID: Int!): Suppliers
+
+		customers: [Customers]!,
+		customer(CustomerID: String!): Customers,        
+		
+		employees: [Employees]!,
+		employee(EmployeeID: Int!): Employees,        
+		
+		orders: [Orders]!,
+		order(OrderID: Int!): Orders
+
+		shippers: [Shippers]!,
+		shipper(ShipperID: Int!): Shippers
+	}
+
+    
+    type Mutation {
+		addCategory(CategoryID: Int!, CategoryName: String!, Description: String!): Categories,
+		addProduct(ProductID: Int!, ProductName: String!, SupplierID: ID!, CategoryID: ID!, QuantityPerUnit: String!, UnitPrice: Float!, UnitsInStock: Int!, ReorderLevel: Int!): Products,
+		addSupplier(SupplierID: Int!, CompanyName: String!, ContactName: String!, ContactTitle: String!, Country: String!, City: String!, Address: String!): Suppliers,
+		addCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!, Country: String!, City: String!, Address: String!): Customers,
+		addEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
+		addOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
+		addShipper(ShipperID: Int!, CompanyName: String!, Description: String!): Shippers
+
+		updateCategory(CategoryID: Int!, CategoryName: String, Description: String): Categories,
+		updateProduct(ProductID: Int!, ProductName: String, SupplierID: ID, CategoryID: ID, QuantityPerUnit: String, UnitPrice: Float, UnitsInStock: Int, ReorderLevel: Int): Products,
+		updateSupplier(SupplierID: Int!, CompanyName: String, ContactName: String, ContactTitle: String, Country: String, City: String, Address: String): Suppliers,
+		updateCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
+		updateEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
+		updateOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
+		updateShipper(ShipperID: Int!, CompanyName: String!, Description: String!): Shippers		
+			
+		deleteCategory(CategoryID: Int!): Categories,
+		deleteProduct(ProductID: Int!): Products,
+		deleteSupplier(SupplierID: Int!): Suppliers,    
+		deleteCustomer(CustomerID: String!): Customers,
+		deleteEmployee(EmployeeID: Int!): Employees,
+		deleteOrder(OrderID: Int!): Orders,
+		deleteShipper(ShipperID: Int!): Shippers	
+	}
+`;
+
+ - Save changes	
+
+Step 03 - Update resolvers.js
+
+	- Open <root_project>/resolvers.js
+
+		- Update const resolvers, go to the end:
+
+		export const resolvers = {
+				Query:{
+					:
+					:
+					:
+
+				customers: () => db.customers,
+				customer: (parent, { CustomerID }) => db.customers.find(customer => customer.CustomerID === CustomerID),
+
+				employees: () => db.employees,
+				employee: (parent, { EmployeeID }) => db.employees.find(employee => employee.EmployeeID === EmployeeID),
+
+				orders: () => db.orders,
+				order: (parent, { OrderID }) => db.orders.find(order => order.OrderID === OrderID),
+
+				shippers: () => db.shippers, 
+				shipper: (parent, { ShipperID }) => db.shippers.find(shipper => shipper.ShipperID === ShipperID),
+				},
+				Categories:{
+					:
+				},
+				Suppliers:{
+					:
+				},
+				Products:{
+					:
+				},
+					:
+					:
+					:
+ 				Customers: {
+        				Orders: (parent) => db.orders.filter(order => order.OrderID === parent.OrderID)
+  				},
+    				Employees: {
+        				Orders: (parent) => db.orders.filter(order => order.OrderID === parent.OrderID)
+    				},
+				Mutation: {
+					addCategory: (parent, args) => {
+						const newCategory = { ...args };
+						db.categories.push(newCategory);
+						return newCategory;
+					},
+					:
+					:
+					:
+					addCustomer: (parent, args) => {
+            				   const newCustomer = { ...args };
+            				   db.customers.push(newCustomer);
+            				   return newCustomer;
+        				},
+        				addEmployee: (parent, args) => {
+            				   const newEmployee = { ...args };
+                  			   db.employees.push(newEmployee);
+            				   return newEmployee;
+       					},
+        				addOrder: (parent, args) => {
+            				   const newOrder = { ...args };
+            				   db.orders.push(newOrder);
+           				   return newOrder;
+        				},
+        				addShipper: (parent, args) => {
+           				   const newShipper = { ...args };
+                     			   db.shippers.push(newShipper);
+              				   return newShipper;
+					},
+					updateCategory: (parent, args) => {
+						const { CategoryID, ...rest } = args;
+						const category = db.categories.find(category => category.CategoryID === CategoryID);
+						Object.assign(category, rest);
+						return category;
+					},
+
+	                                :
+					:
+					:   
+        				updateCustomer: (parent, args) => {
+          					const { CustomerID, ...rest } = args;
+                                                const customer = db.customers.find(customer => customer.CustomerID === CustomerID);
+            					Object.assign(customer, rest);
+            					return customer;
+        				},
+        				updateEmployee: (parent, args) => {
+            					const { EmployeeID, ...rest } = args;
+            					const employee = db.employees.find(employee => employee.EmployeeID === EmployeeID);
+            					Object.assign(employee, rest);
+            					return employee;
+       					},
+        				updateOrder: (parent, args) => {
+           					const { OrderID, ...rest } = args;
+            					const order = db.orders.find(order => order.OrderID === OrderID);
+            					Object.assign(order, rest);
+            					return order;
+       					},
+       					updateShipper: (parent, args) => {
+            					const { ShipperID, ...rest } = args;
+            					const shipper = db.shippers.find(shipper => shipper.ShipperID === ShipperID);
+            					Object.assign(shipper, rest);
+            					return shipper;
+        				},
+					deleteCategory: (parent, { CategoryID }) => {
+						const category = db.categories.find(category => category.CategoryID === CategoryID);
+						db.categories = db.categories.filter(category => category.CategoryID !== CategoryID);
+						return category;
+					},
+					:
+					:
+					: 
+ 					deleteCustomer: (parent, { CategoryID }) => {
+            					const customer = db.customers.find(customer => customer.CustomerID === CustomerID);
+           					db.categories = db.customers.filter(customer => customer.CustomerID !== CustomerID);
+            					return customer;
+        				},
+        				deleteEmployee: (parent, { ProductID }) => {
+            					const employee = db.employees.find(employee => employee.EmployeeID === EmployeeID);
+            					db.employees = db.employees.filter(employee => employee.EmployeeID !== EmployeeID);
+            					return employee;
+        				},
+        				deleteOrder: (parent, { OrderID }) => {
+            					const order = db.orders.find(order => order.OrderID === OrderID);
+            					db.orders = db.orders.filter(order => order.OrderID !== OrderID);
+            					return order;
+        				},
+        				deleteShipper: (parent, { ShipperID }) => {
+            					const shipper = db.shippers.find(shipper => shipper.ShipperID === ShipperID);
+            					db.shippers = db.shippers.filter(shipper => shipper.ShipperID !== ShipperID);
+            					return shipper;
+        				}
+    				    }
+				}
+				
+		- Save changes
+				
+Stepo 04 - Run application 
+
+	- Open the terminal window in your favorite IDE and execute the next command:
+	
+		npm start
+
+Step 05 - Create the MongoDB models 
+
+- Creates the new models for each data object into <root_project>/models folder
+	
+		- Creates mdl_Customers.js and writes:
+		
+		import mongoose from "mongoose";
+
+		const customerSchema = new mongoose.Schema({
+    			CustomerID: { type: String, required: true },
+    			CompanyName: { type: String, required: true },
+    			ContactName: { type: String, required: true },
+    			ContactTitle: { type: String, required: true },
+    			Country: { type: String, required: true },
+    			City: { type: String, required: true },
+    			Address: { type: String, required: true }
+		});
+        
+		mongoose.model('Customers', customerSchema);
+                    
+			
+	- Save changes	
+	
+	
+	- Creates mdl_Employees.js and writes:
+		
+		import mongoose from "mongoose";
+
+		const employeeSchema = new mongoose.Schema({
+    			EmployeeID: { type: Number, required: true },
+    			LastName: { type: String, required: true },
+    			FirstName: { type: String, required: true },
+    			Title: { type: String, required: true },
+    			TitleOfCourtesy: { type: String, required: true },
+    			BirthDate: { type: String, required: true },
+    			HireDate: { type: String, required: true },
+    			Country: { type: String, required: true },
+    			City: { type: String, required: true },
+    			Address: { type: String, required: true }
+		});
+        
+		mongoose.model('Employees', employeeSchema);
+                    
+
+	- Save changes		
+
+	
+	- Creates mdl_Orders.js and writes:
+
+			
+		import mongoose from "mongoose";
+
+		const orderSchema = new mongoose.Schema({
+    			OrderID: { type: Number, required: true },
+    			CustomerID: { type: String, required: true },
+    			EmployeeID: { type: Number, required: true },
+    			OrderDate: { type: String, required: true },
+    			RequiredDate: { type: String, required: true },
+    			ShippedDate: { type: String, required: true },
+    			ShipVia: { type: Number, required: true },
+    			Freight: { type: Number, required: true },
+    			ShipName: { type: String, required: true },
+    			ShipCountry: { type: String, required: true },
+    			ShipCity: { type: String, required: true },
+    			ShipAddress: { type: String, required: true },
+    			ShipPostalCode: { type: String, required: true }
+		});
+        
+		mongoose.model('Orders', orderSchema);
+                    
+
+	- Save changes	  
+
+
+        - Creates mdl_Orders.js and writes:
+
+	        import mongoose from "mongoose";
+
+		const orderDetailSchema = new mongoose.Schema({
+			OrderID : { type: Number, required: true },
+			ProductID : { type: Number, required: true },
+			UnitPrice: { type: Number, required: true },
+    			Quantity : { type: Number, required: true },
+			Discount: { type: Number, required: true }
+		});
+
+		mongoose.model('OrderDetails', orderDetailSchema);
+			
+
+	- Save changes	  
+
+	- Creates mdl_Shippers.js and writes:
+
+	        import mongoose from "mongoose";
+
+		const shipperSchema = new mongoose.Schema({
+			ShipperID : { type: Number, required: true },
+			CompanyName: { type: String, required: true },
+			Phone: { type: String, required: true }
+		});
+
+		mongoose.model('Shippers', shipperSchema);
+	
+
+	- Save changes	  
+
+
+Step 06 - Update the new resolvers using MongoDB
+
+	- Create new file: "<root_project>/data/resolversMongo.js" and writes
+
+                import mongoose from "mongoose";
+		         :
+			 :
+			 : 
+		const Customers = mongoose.model('Customers');
+		const Employees = mongoose.model('Employees');
+		const Orders = mongoose.model('Orders');
+		const Shippers = mongoose.model('Shippers');
+
+		export const resolvers = {
+			Query: {
+				  :
+			          :
+			          : 
+			    customers: async () => await Customers.find(),
+		            customer: async (parent, { CustomerID }) => await Customers.findOne({CustomerID: CustomerID}),
+
+		            employees: async () => await Employees.find(),
+		            employee:  async (parent, { EmployeeID }) => await Employees.findOne({EmployeeID: EmployeeID}),
+
+		            orders: async () => await Orders.find(),
+		            order: async (parent, { OrderID }) => await Orders.findOne({OrderID: OrderID}),
+
+		            shippers: async () => await Shippers.find(),
+		            shipper: async (parent, { ShipperID }) => await Shippers.findOne({ShipperID: ShipperID}),
+
+			},
+			Categories: {
+				Products: async (parent) => await Products.find({ CategoryID: parent.CategoryID })
+			},
+			          :
+			          :
+			          :
+                        Customers: {
+		                Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
+	                },
+	                Employees: {
+		                Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
+			},
+			Mutation: {
+				addCategory: async (parent, args) => {
+					const newCategory = new Categories(args);
+					return newCategory.save();
+				},
+				  :
+			          :
+			          :
+				addCustomer: async (parent, args) => {
+    					const newCustomer = new Customers(args);
+					return newCustomer.save();	
+				},
+				addEmployee: async (parent, args) => {
+					const newEmployee = new Employees(args);
+					return newEmployee.save();
+				},
+				addOrder: async (parent, args) => {
+					const newOrder = new Orders(args);
+	           			return newOrder.save();
+				},
+				addShipper: async (parent, args) => {
+					const newShipper = new Shippers(args);
+	           			return newShipper.save();
+				},
+				updateCategory: async (parent, args) => {
+					const { CategoryID, ...rest } = args;
+					return Categories.findOneAndUpdate({CategoryID: CategoryID}, rest, { new: true });
+				},
+				  :
+			          :
+			          :
+				updateCustomer: async (parent, args) => {
+					const { CustomerID, ...rest } = args;
+					return Customers.findOneAndUpdate({CustomerID: CustomerID}, rest, { new: true });
+				},
+				updateEmployee: async (parent, args) => {
+					const { EmployeeID, ...rest } = args;
+					return Employees.findOneAndUpdate({EmployeeID: EmployeeID}, rest, { new: true });
+				},
+				updateOrder: async (parent, args) => {
+					const { OrderID, ...rest } = args;
+					return Suppliers.findOneAndUpdate({OrderID: OrderID}, rest, { new: true });
+				},
+				updateShipper: async (parent, args) => {
+					const { ShipperID, ...rest } = args;
+					return Shippers.findOneAndUpdate({ShipperID: ShipperID}, rest, { new: true });
+				},
+
+				deleteCategory: async (parent, { CategoryID }) => {
+					return Categories.findOneAndDelete({CategoryID: CategoryID});
+				},
+				  :
+			          :
+			          :
+				deleteCustomer: async (parent, { CustomerID }) => {
+					return Customers.findOneAndDelete({CustomerID: CustomerID});
+				},
+				deleteEmployee: async (parent, { EmployeeID }) => {
+					return Employees.findOneAndDelete({EmployeeID: EmployeeID});
+				},
+				deleteOrder: async (parent, { OrderID }) => {
+					return Orders.findOneAndDelete({OrderID: OrderID});
+				},
+				deleteShipper: async (parent, { ShipperID }) => {
+					return Orders.findOneAndDelete({ShipperID: ShipperID});
+				}
+			}
+		}
+	
+	- Save changes
+
+
+
+
