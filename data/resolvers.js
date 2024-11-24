@@ -37,6 +37,10 @@ export const resolvers = {
     Employees: {
         Orders: (parent) => db.orders.filter(order => order.OrderID === parent.OrderID)
     },
+	Orders: {
+		Customer: (parent) => db.customers.find(customer => customer.CustomerID === parent.CustomerID),
+		Employee: (parent) => db.employees.find(employee => customer.EmployeeID === parent.EmployeeID)
+	},
     Mutation: {
         addCategory: (parent, args) => {
             const newCategory = { ...args };

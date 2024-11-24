@@ -29,7 +29,7 @@ export const resolvers = {
 		order: async (parent, { OrderID }) => await Orders.findOne({OrderID: OrderID}),
 
 		shippers: async () => await Shippers.find(),
-		shipper: async (parent, { ShipperID }) => await Shippers.findOne({ShipperID: ShipperID}),
+		shipper: async (parent, { ShipperID }) => await Shippers.findOne({ShipperID: ShipperID})
 	},
 	Categories: {
 		Products: async (parent) => await Products.find({ CategoryID: parent.CategoryID })
@@ -46,6 +46,10 @@ export const resolvers = {
 	},
 	Employees: {
 		Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
+	},
+	Orders: {
+		Customer: async (parent) => await Customers.findOne({CustomerID: parent.CustomerID}),
+		Employee: async (parent) => await Employees.findOne({EmployeeID: parent.EmployeeID})
 	},
 	Mutation: {
 		addCategory: async (parent, args) => {
