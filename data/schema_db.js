@@ -28,6 +28,7 @@ export const typeDefs = `#graphql
 		UnitPrice: Float!,
 		UnitsInStock: Int!,        
 		ReorderLevel: Int!
+		OrderDetails: [OrderDetails]!
 	}
 
 	type Customers {
@@ -71,8 +72,17 @@ export const typeDefs = `#graphql
 		ShipCity: String!,
 		ShipAddress: String!,
 		ShipPostalCode: String!
+		OrderDetails: [OrderDetails]!
 	}
-
+	
+	type OrderDetails {
+	    OrderID : Int!,
+		ProductID : Int!,
+		UnitPrice : Float!,
+		Quantity : Int!,
+		Discount : Float!
+	}
+		
 	type Shippers {
 		ShipperID: Int!,
 		CompanyName: String!,
@@ -99,7 +109,7 @@ export const typeDefs = `#graphql
 		order(OrderID: Int!): Orders,
 
 		shippers: [Shippers]!,
-		shipper(ShipperID: Int!): Shippers
+		shipper(ShipperID: Int!): Shippers,
 	}
     
     type Mutation {
