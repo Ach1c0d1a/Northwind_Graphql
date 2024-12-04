@@ -1,133 +1,82 @@
 import mongoose from "mongoose";
 
-const Categories = mongoose.model('Categories');
-const Products = mongoose.model('Products');
-const Suppliers = mongoose.model('Suppliers');
-const Customers = mongoose.model('Customers');
-const Employees = mongoose.model('Employees');
-const Orders = mongoose.model('Orders');
-const Shippers = mongoose.model('Shippers');
+const Bugis = mongoose.model('Bugis');
+const Lotes = mongoose.model('Lotes');
+const Recepciones = mongoose.model('Recepciones');
+const Guias = mongoose.model('Guias');
 
 export const resolvers = {
 	Query: {
-		categories: async () => await Categories.find(),
-		category: async (parent, { CategoryID }) => await Categories.findOne({CategoryID: CategoryID}),
+		bugis: async () => await Bugis.find(),
+		bugi:  async (parent, { BugiID }) => await Bugis.findOne({BugiID: BugiID}),
 
-		products: async () => await Products.find(),
-		product:  async (parent, { ProductID }) => await Products.findOne({ProductID: ProductID}),
+		lotes: async () => await Lotes.find(),
+		lote:  async (parent, { LoteID }) => await Lotes.findOne({LoteID: LoteID}),
 
-		suppliers: async () => await Suppliers.find(),
-		supplier: async (parent, { SupplierID }) => await Suppliers.findOne({SupplierID: SupplierID}),
+		recepciones: async () => await Recepciones.find(),
+		recepcion: async (parent, { RecepcionID }) => await Recepciones.findOne({RecepcionID: RecepcionID}),
 
-		customers: async () => await Customers.find(),
-		customer: async (parent, { CustomerID }) => await Customers.findOne({CustomerID: CustomerID}),
-
-		employees: async () => await Employees.find(),
-		employee:  async (parent, { EmployeeID }) => await Employees.findOne({EmployeeID: EmployeeID}),
-
-		orders: async () => await Orders.find(),
-		order: async (parent, { OrderID }) => await Orders.findOne({OrderID: OrderID}),
-
-		shippers: async () => await Shippers.find(),
-		shipper: async (parent, { ShipperID }) => await Shippers.findOne({ShipperID: ShipperID})
+		guias: async () => await Guias.find(),
+		guia: async (parent, { GuiaID }) => await Guias.findOne({GuiaID: GuiaID})
 	},
-	Categories: {
-		Products: async (parent) => await Products.find({ CategoryID: parent.CategoryID })
+	Bugis: {
+		Lote: async (parent) => await Lotes.findOne({LoteID: parent.LoteID})
 	},
-	Suppliers: {
-		Products: async (parent) => await Products.find({ SupplierID: parent.SupplierID })
+	Lotes: {
+		Recepciones: async (parent) => await Recepciones.find({ LoteID: parent.LoteID })
 	},
-	Products: {
-		Supplier: async (parent) => await Suppliers.findOne({SupplierID: parent.SupplierID}),
-		Category: async (parent) => await Categories.findOne({CategoryID: parent.CategoryID})
+	Guias: {
+		Recepciones: async (parent) => await Recepciones.find({ GuiaID: parent.GuiaID })
 	},
-	Customers: {
-		Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
-	},
-	Employees: {
-		Orders: async (parent) => await Orders.find({ OrderID: parent.OrderID })
-	},
-	Orders: {
-		Customer: async (parent) => await Customers.findOne({CustomerID: parent.CustomerID}),
-		Employee: async (parent) => await Employees.findOne({EmployeeID: parent.EmployeeID})
+	Recepciones: {
+		Lote: async (parent) => await Lotes.findOne({LoteID: parent.LoteID}),
+		Guia: async (parent) => await Guias.findOne({GuiaID: parent.GuiaID}),
+		Bugis: async (parent) => await Bugis.find({ BugiID: parent.BugiID })
 	},
 	Mutation: {
-		addCategory: async (parent, args) => {
-    		const newCategory = new Categories(args);
-				return newCategory.save();
+		addBugi: async (parent, args) => {
+			const newBugi = new Bugis(args);
+				return newBugi.save();
 		},
-		addProduct: async (parent, args) => {
-			const newProduct = new Products(args);
-				return newProduct.save();
+		addLote: async (parent, args) => {
+			const newLote = new Lotes(args);
+				return newLote.save();
 		},
-		addSupplier: async (parent, args) => {
-			const newSupplier = new Suppliers(args);
-	           	return newSupplier.save();
+		addRecepcion: async (parent, args) => {
+			const newRecepcion = new Recepciones(args);
+	           	return newRecepcion.save();
 		},
-		addCustomer: async (parent, args) => {
-    		const newCustomer = new Customers(args);
-				return newCustomer.save();	
+		addGuia: async (parent, args) => {
+			const newGuia = new Guias(args);
+	           	return newGuia.save();
 		},
-		addEmployee: async (parent, args) => {
-			const newEmployee = new Employees(args);
-				return newEmployee.save();
+		updateBugi: async (parent, args) => {
+			const { BugiID, ...rest } = args;
+				return Bugis.findOneAndUpdate({BugiID: BugiID}, rest, { new: true });
 		},
-		addOrder: async (parent, args) => {
-			const newOrder = new Orders(args);
-	           	return newOrder.save();
+		updateLote: async (parent, args) => {
+			const { LoteID, ...rest } = args;
+				return Lotes.findOneAndUpdate({LoteID: LoteID}, rest, { new: true });
 		},
-		addShipper: async (parent, args) => {
-			const newShipper = new Shippers(args);
-	           	return newShipper.save();
+		updateRecepcion: async (parent, args) => {
+			const { RecepcionID, ...rest } = args;
+				return Recepciones.findOneAndUpdate({RecepcionID: RecepcionID}, rest, { new: true });
 		},
-		updateCategory: async (parent, args) => {
-			const { CategoryID, ...rest } = args;
-				return Categories.findOneAndUpdate({CategoryID: CategoryID}, rest, { new: true });
+		updateGuia: async (parent, args) => {
+			const { GuiaID, ...rest } = args;
+				return Guias.findOneAndUpdate({GuiaID: GuiaID}, rest, { new: true });
 		},
-		updateProduct: async (parent, args) => {
-			const { ProductID, ...rest } = args;
-				return Products.findOneAndUpdate({ProductID: ProductID}, rest, { new: true });
+		deleteBugi: async (parent, { BugiID }) => {
+			return Bugis.findOneAndDelete({BugiID: BugiID});
 		},
-		updateSupplier: async (parent, args) => {
-			const { SupplierID, ...rest } = args;
-				return Suppliers.findOneAndUpdate({SupplierID: SupplierID}, rest, { new: true });
+		deleteLote: async (parent, { LoteID }) => {
+			return Lotes.findOneAndDelete({LoteID: LoteID});
 		},
-		updateCustomer: async (parent, args) => {
-			const { CustomerID, ...rest } = args;
-				return Customers.findOneAndUpdate({CustomerID: CustomerID}, rest, { new: true });
+		deleteRecepcion: async (parent, { RecepcionID }) => {
+			return Recepciones.findOneAndDelete({RecepcionID: RecepcionID});
 		},
-		updateEmployee: async (parent, args) => {
-			const { EmployeeID, ...rest } = args;
-				return Employees.findOneAndUpdate({EmployeeID: EmployeeID}, rest, { new: true });
-		},
-		updateOrder: async (parent, args) => {
-			const { OrderID, ...rest } = args;
-				return Orders.findOneAndUpdate({OrderID: OrderID}, rest, { new: true });
-		},
-		updateShipper: async (parent, args) => {
-			const { ShipperID, ...rest } = args;
-				return Shippers.findOneAndUpdate({ShipperID: ShipperID}, rest, { new: true });
-		},
-		deleteCategory: async (parent, { CategoryID }) => {
-			return Categories.findOneAndDelete({CategoryID: CategoryID});
-		},
-		deleteProduct: async (parent, { ProductID }) => {
-			return Products.findOneAndDelete({ProductID: ProductID});
-		},
-		deleteSupplier: async (parent, { SupplierID }) => {
-			return Suppliers.findOneAndDelete({SupplierID: SupplierID});
-		},
-		deleteCustomer: async (parent, { CustomerID }) => {
-			return Customers.findOneAndDelete({CustomerID: CustomerID});
-		},
-		deleteEmployee: async (parent, { EmployeeID }) => {
-			return Employees.findOneAndDelete({EmployeeID: EmployeeID});
-		},
-		deleteOrder: async (parent, { OrderID }) => {
-			return Orders.findOneAndDelete({OrderID: OrderID});
-		},
-		deleteShipper: async (parent, { ShipperID }) => {
-			return Shippers.findOneAndDelete({ShipperID: ShipperID});
+		deleteGuia: async (parent, { GuiaID }) => {
+			return Guias.findOneAndDelete({GuiaID: GuiaID});
 		}
 	}
 }

@@ -4,18 +4,15 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 
 //  Connection to MongoDB
 import mongoose from "mongoose";
-mongoose.connect('mongodb://localhost:27017/', {dbName: 'Northwind'})
+mongoose.connect('mongodb://localhost:27017/', {dbName: 'Prosalud'})
 	.then(r  => console.log('Connected to MongoDB'));
 
 
 // Load models
-import './models/mdl_Categories.js';
-import './models/mdl_Products.js';
-import './models/mdl_Suppliers.js';
-import './models/mdl_Customers.js';
-import './models/mdl_Employees.js';
-import './models/mdl_Orders.js';
-import './models/mdl_Shippers.js';
+import './models/mdl_Bugis.js'
+import './models/mdl_Lotes.js';
+import './models/mdl_Recepciones.js';
+import './models/mdl_Guias.js';
 
 // Load data resources
 import { typeDefs } from './data/schema_db.js';
@@ -35,5 +32,5 @@ const server = new ApolloServer({
 
 // Run Apollo Server
 const {url} = await startStandaloneServer(server,{
-	listen: { port: 4005 }
+	listen: { port: 13000 }
 });

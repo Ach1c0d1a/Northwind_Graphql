@@ -1,130 +1,72 @@
 export const typeDefs = `#graphql
-	type Categories {
-		CategoryID: Int!,
-		CategoryName: String!,
-		Description: String!,
-		Products: [Products]!
+	type Bugis {
+		BugiID: Int!,
+		Hora_Ini_Envase: String!, 
+		LoteID: ID!,
+		Lote: Lotes!,
+		TempEnvasado: Float!	
 	}
 
-	type Suppliers{
-		SupplierID: Int!,
-		CompanyName: String!,
-		ContactName: String!,
-		ContactTitle: String!,
-		Country: String!,
-		City: String!,
-		Address: String!,
-		Products: [Products]!
+	type Lotes {
+		LoteID: Int!,
+    	FechaLlegada: String!,
+    	TempPlanta: Float!,
+    	HoraI_Descarga: String!,
+    	HoraF_Descarga: String!,
+    	TempSalida: Float!,
+    	Recepciones: [Recepciones]!
 	}
 
-	type Products {
-		ProductID: Int!,
-		ProductName: String!,
-		SupplierID: ID!,
-		Supplier: Suppliers!,
-		CategoryID: ID!,
-		Category: Categories!,
-		QuantityPerUnit: String!,
-		UnitPrice: Float!,
-		UnitsInStock: Int!,        
-		ReorderLevel: Int!
+	type Recepciones {
+		RecepcionID: String!,
+		Especie: String!,
+		PesoEntrada: Float!,
+		PesoSalida: Float!,
+		TempRecepcion: Float!,
+		CamaraSalida: String!,
+		CodDescarga: String!,
+		GuiaID: ID!,
+		Guia: Guias!,
+		LoteID: ID!,
+		Lote: Lotes!,
+		Bugis: [Bugis]!
 	}
 
-	type Customers {
-		CustomerID: String!,
-		CompanyName: String!,
-		ContactName: String!,
-		ContactTitle: String!,
-		Country: String!,
-		City: String!,
-		Address: String!,
-		Orders: [Orders]!
-	}
-	
-	type Employees {
-		EmployeeID: Int!,
-    	LastName: String!,
-    	FirstName: String!,
-    	Title: String!,
-    	TitleOfCourtesy: String!,
-    	BirthDate: String!,
-    	HireDate: String!,
-    	Country: String!,
-    	City: String!,
-    	Address: String!,
-		Orders: [Orders]!
-	}
-
-	type Orders {
-		OrderID: Int!,
-		CustomerID: ID!,
-		Customer: Customers!,
-		EmployeeID: ID!,
-		Employee: Employees!,
-		OrderDate: String!,
-		RequiredDate: String!,
-		ShippedDate: String!,
-		ShipVia: Int!,
-		Freight: Float!,
-		ShipName: String!,
-		ShipCountry: String!,
-		ShipCity: String!,
-		ShipAddress: String!,
-		ShipPostalCode: String!
-	}
-
-	type Shippers {
-		ShipperID: Int!,
-		CompanyName: String!,
-		Phone: String!,
+	type Guias {
+		GuiaID: Int!,
+		FechaEnvio: String!,
+		Placa: String!,
+		Recepciones: [Recepciones]!
 	}
 
 	type Query {
-		categories: [Categories]!,
-		category(CategoryID: Int!): Categories,        
-		
-		products: [Products]!,
-		product(ProductID: Int!): Products,        
-		
-		suppliers: [Suppliers]!,
-		supplier(SupplierID: Int!): Suppliers,
+		bugis: [Bugis]!
+		bugi(BugiID: Int!): Bugis,  
 
-		customers: [Customers]!,
-		customer(CustomerID: String!): Customers,        
+		lotes: [Lotes]!,
+		lote(LoteID: Int!): Lotes,     
 		
-		employees: [Employees]!,
-		employee(EmployeeID: Int!): Employees,        
-		
-		orders: [Orders]!,
-		order(OrderID: Int!): Orders,
+		recepciones: [Recepciones]!,
+		recepcion(RecepcionID: String!): Recepciones,
 
-		shippers: [Shippers]!,
-		shipper(ShipperID: Int!): Shippers
+		guias: [Guias]!,
+		guia(GuiaID: Int!): Guias
 	}
     
     type Mutation {
-		addCategory(CategoryID: Int!, CategoryName: String!, Description: String!): Categories,
-		addProduct(ProductID: Int!, ProductName: String!, SupplierID: ID!, CategoryID: ID!, QuantityPerUnit: String!, UnitPrice: Float!, UnitsInStock: Int!, ReorderLevel: Int!): Products,
-		addSupplier(SupplierID: Int!, CompanyName: String!, ContactName: String!, ContactTitle: String!, Country: String!, City: String!, Address: String!): Suppliers,
-		addCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
-		addEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
-		addOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
-		addShipper(ShipperID: Int!, CompanyName: String!, Phone: String!): Shippers
+		addBugi(BugiID: Int!, Hora_Ini_Envase: String!, LoteID: ID!, TempEnvasado: Float!): Bugis,
+		addLote(LoteID: Int!, FechaLlegada: String!, TempPlanta: Float!, HoraI_Descarga: String!, HoraF_Descarga: String!,  TempSalida: Float!): Lotes,
+		addRecepcion(RecepcionID: String!, Especie: String!, PesoEntrada: Float!, PesoSalida: Float!, TempRecepcion: Float!, CamaraSalida: String!, CodDescarga: String!, GuiaID: ID!, LoteID: ID!): Recepciones,
+		addGuia(GuiaID: Int!, FechaEnvio: String!, Placa: String!): Guias
 
-		updateCategory(CategoryID: Int!, CategoryName: String, Description: String): Categories,
-		updateProduct(ProductID: Int!, ProductName: String, SupplierID: ID, CategoryID: ID, QuantityPerUnit: String, UnitPrice: Float, UnitsInStock: Int, ReorderLevel: Int): Products,
-		updateSupplier(SupplierID: Int!, CompanyName: String, ContactName: String, ContactTitle: String, Country: String, City: String, Address: String): Suppliers,
-		updateCustomer(CustomerID: String!, CompanyName: String!, ContactName: String!, ContactTitle: String!,	Country: String!, City: String!, Address: String!): Customers,
-		updateEmployee(EmployeeID: Int!, LastName: String!, FirstName: String!, Title: String!, TitleOfCourtesy: String!, BirthDate: String!, HireDate: String!, Country: String!, City: String!, Address: String!): Employees,
-		updateOrder(OrderID: Int!, CustomerID: ID!, EmployeeID: ID!, OrderDate: String!, RequiredDate: String!, ShippedDate: String!, ShipVia: Int!, Freight: Float!, ShipName: String!, ShipCountry: String!, ShipCity: String!, ShipAddress: String!, ShipPostalCode: String!): Orders,
-		updateShipper(ShipperID: Int!, CompanyName: String!, Phone: String!): Shippers		
-			
-		deleteCategory(CategoryID: Int!): Categories,
-		deleteProduct(ProductID: Int!): Products,
-		deleteSupplier(SupplierID: Int!): Suppliers,    
-		deleteCustomer(CustomerID: String!): Customers,
-		deleteEmployee(EmployeeID: Int!): Employees,
-		deleteOrder(OrderID: Int!): Orders,
-		deleteShipper(ShipperID: Int!): Shippers	
+		updateBugi(BugiID: Int!, Hora_Ini_Envase: String!, LoteID: ID!, TempEnvasado: Float!): Bugis,
+		updateLote(LoteID: Int!, FechaLlegada: String!, TempPlanta: Float!, HoraI_Descarga: String!, HoraF_Descarga: String!,  TempSalida: Float!): Lotes,
+		updateRecepcion(RecepcionID: String!, Especie: String!, PesoEntrada: Float!, PesoSalida: Float!, TempRecepcion: Float!, CamaraSalida: String!, CodDescarga: String!, GuiaID: ID!, LoteID: ID!): Recepciones,
+		updateGuia(GuiaID: Int!, FechaEnvio: String!, Placa: String!): Guias	
+
+		deleteBugi(BuguiID: Int!): Bugis,	
+		deleteLote(LoteID: Int!): Lotes,
+		deleteRecepcion(RecepcionID: String!): Recepciones,
+		deleteGuia(GuiaID: Int!): Guias		
 	}
 `;
